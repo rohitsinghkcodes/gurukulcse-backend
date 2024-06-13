@@ -7,7 +7,7 @@ import notesModel from "../models/notesModel.js";
 //? ADD NEW SUB NOTES CONTROLLER || POST
 export const addNotesController = async (req, res) => {
   try {
-    const { name, description, pdfLink } = req.fields;
+    const { name, description, pdfLink, zipLink } = req.fields;
     const { image } = req.files;
 
     // Validation
@@ -17,7 +17,11 @@ export const addNotesController = async (req, res) => {
       case !description:
         return res.status(500).send({ error: "description is required!" });
       case !pdfLink:
-        return res.status(500).send({ error: "link is required!" });
+        return res.status(500).send({ error: "notes link is required!" });
+      case !zipLink:
+        return res
+          .status(500)
+          .send({ error: "Chapter wise notes link is required!" });
       case image && image.size > 1000000:
         return res
           .status(500)
@@ -58,7 +62,7 @@ export const addNotesController = async (req, res) => {
 //? UPDATE Course CONTROLLER || PUT
 export const updateNotesController = async (req, res) => {
   try {
-    const { name, description, pdfLink } = req.fields;
+    const { name, description, pdfLink, zipLink } = req.fields;
     const { image } = req.files;
     // Validation
     switch (true) {
@@ -68,6 +72,8 @@ export const updateNotesController = async (req, res) => {
         return res.status(500).send({ error: "description is required!" });
       case !pdfLink:
         return res.status(500).send({ error: "link is required!" });
+      case !zipLink:
+        return res.status(500).send({ error: "ziplink is required!" });
       case image && image.size > 1000000:
         return res
           .status(500)

@@ -14,6 +14,10 @@ const notesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  zipLink: {
+    type: String,
+    required: true,
+  },
   image: {
     data: Buffer,
     contentType: String,
